@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corelink Technologies - Smart IT & Network Solutions</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            950: '#020b18',
+                            900: '#061838',
+                            800: '#0a2550',
+                            700: '#0f3875',
+                            600: '#144c9e',
+                        },
+                        brand: {
+                            cyan: '#0088cc',
+                            lightCyan: '#38bdf8',
+                            brightBlue: '#1a73e8'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #020b18;
+            color: #e2e8f0;
+            font-family: 'Inter', sans-serif;
+        }
+        .page-view {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.25s ease-in-out;
+        }
+        .page-view.active {
+            display: block;
+            opacity: 1;
+        }
+        .card-navy {
+            background: #061838;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            transition: all 0.25s ease;
+        }
+        .card-navy:hover {
+            border-color: rgba(56, 189, 248, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(0, 136, 204, 0.15);
+        }
+        .hero-banner {
+            background: linear-gradient(180deg, #061838 0%, #031027 100%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-brand-cyan selection:text-white">
+
+    <header class="bg-navy-900 border-b border-navy-800 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Brand Logo with Custom SVG Icon -->
+                <div class="flex items-center space-x-3 cursor-pointer" onclick="navigateTo('home')">
+                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-brand-cyan to-blue-700 flex items-center justify-center shadow-lg shadow-cyan-500/20">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-xl sm:text-2xl font-black tracking-wider text-white leading-tight">
+                            CORELINK
+                        </span>
+                        <span class="text-[10px] sm:text-xs text-brand-cyan font-bold tracking-widest uppercase">
+                            TECHNOLOGIES
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <button onclick="navigateTo('home')" id="nav-home" class="nav-link text-white font-semibold text-sm hover:text-brand-cyan transition">Home</button>
+                    <button onclick="navigateTo('services')" id="nav-services" class="nav-link text-slate-300 text-sm hover:text-white transition">Services</button>
+                    <button onclick="navigateTo('coverage')" id="nav-coverage" class="nav-link text-slate-300 text-sm hover:text-white transition">Coverage</button>
+                    <button onclick="navigateTo('about')" id="nav-about" class="nav-link text-slate-300 text-sm hover:text-white transition">About & Contact</button>
+                </nav>
+
+                <!-- Header CTA & Mobile Menu Button -->
+                <div class="flex items-center space-x-4">
+                    <a href="https://wa.me/923135893970?text=Hello%20Corelink%20Technologies,%20I%20would%20like%20to%20inquire%20about%20your%20IT%20services." 
+                       target="_blank" 
+                       class="bg-brand-cyan hover:bg-sky-600 text-white font-semibold text-xs sm:text-sm px-4 py-2.5 rounded-md shadow-md transition flex items-center space-x-2">
+                        <i class="fa-brands fa-whatsapp text-base"></i>
+                        <span class="hidden sm:inline">WhatsApp Us</span>
+                    </a>
+
+                    <button onclick="toggleMobileMenu()" class="md:hidden text-slate-300 hover:text-white text-xl p-2">
+                        <i class="fa-solid fa-bars" id="menu-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-navy-900 border-b border-navy-800 px-4 py-4 space-y-3">
+            <button onclick="navigateTo('home'); toggleMobileMenu();" class="block w-full text-left text-slate-200 py-2 hover:text-brand-cyan font-medium text-sm">Home</button>
+            <button onclick="navigateTo('services'); toggleMobileMenu();" class="block w-full text-left text-slate-200 py-2 hover:text-brand-cyan font-medium text-sm">Services</button>
+            <button onclick="navigateTo('coverage'); toggleMobileMenu();" class="block w-full text-left text-slate-200 py-2 hover:text-brand-cyan font-medium text-sm">Pakistan Coverage</button>
+            <button onclick="navigateTo('about'); toggleMobileMenu();" class="block w-full text-left text-slate-200 py-2 hover:text-brand-cyan font-medium text-sm">About & Contact</button>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        
+        <!-- PAGE 1: HOME -->
+        <section id="page-home" class="page-view active">
+            <!-- Hero Banner -->
+            <div class="hero-banner py-16 lg:py-24 px-4 sm:px-6 lg:px-8">
+                <div class="max-w-7xl mx-auto">
+                    <div class="max-w-3xl">
+                        <!-- Hero Logo Emblem -->
+                        <div class="inline-flex items-center space-x-2.5 bg-navy-800/80 border border-cyan-500/30 px-3.5 py-1.5 rounded-full mb-6">
+                            <svg class="w-4 h-4 text-brand-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                            <span class="text-brand-cyan text-xs font-bold tracking-widest uppercase">YOUR NETWORK - OUR CONNECTION</span>
+                        </div>
+                        
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6">
+                            Smart IT Solutions for a Connected Future.
+                        </h1>
+                        <p class="text-slate-300 text-sm sm:text-base mb-8 leading-relaxed max-w-2xl">
+                            Professional networking, CCTV, Wi-Fi, LAN setup and IT support for homes and businesses across Islamabad, Rawalpindi, and all major cities in Pakistan.
+                        </p>
+                        <div class="flex flex-wrap gap-4">
+                            <a href="https://wa.me/923135893970?text=Hi%20Corelink%20Technologies,%20I%20want%20to%20discuss%20an%20IT%20project." 
+                               target="_blank" 
+                               class="inline-flex items-center space-x-2 bg-brand-cyan hover:bg-sky-600 text-white font-semibold text-sm px-6 py-3 rounded-md transition shadow-lg">
+                                <span>WhatsApp Us</span>
+                                <i class="fa-solid fa-arrow-right text-xs"></i>
+                            </a>
+                            <button onclick="navigateTo('services')" class="inline-flex items-center space-x-2 bg-navy-800 hover:bg-navy-700 text-white font-semibold text-sm px-6 py-3 rounded-md border border-navy-700 transition">
+                                <span>Explore Services</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Authentic Core Commitments Section -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                <div class="text-center mb-12">
+                    <span class="text-brand-cyan text-xs font-bold uppercase tracking-widest">Why Choose Us</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">Our Core Commitments</h2>
+                    <p class="text-slate-400 text-xs sm:text-sm mt-2">Built on genuine technical expertise, honest pricing, and client-first execution.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="card-navy p-6">
+                        <div class="text-brand-cyan text-3xl mb-4"><i class="fa-solid fa-user-shield"></i></div>
+                        <h3 class="text-base font-bold text-white mb-2">Technical Expertise</h3>
+                        <p class="text-slate-400 text-xs leading-relaxed">Qualified engineers for enterprise switches, VLANs, routing, firewalls, and camera networks.</p>
+                    </div>
+
+                    <div class="card-navy p-6">
+                        <div class="text-brand-cyan text-3xl mb-4"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+                        <h3 class="text-base font-bold text-white mb-2">Transparent Proposals</h3>
+                        <p class="text-slate-400 text-xs leading-relaxed">Clear, itemized hardware and cabling estimates with zero hidden fees or unverified costs.</p>
+                    </div>
+
+                    <div class="card-navy p-6">
+                        <div class="text-brand-cyan text-3xl mb-4"><i class="fa-solid fa-truck-fast"></i></div>
+                        <h3 class="text-base font-bold text-white mb-2">Nationwide On-Site</h3>
+                        <p class="text-slate-400 text-xs leading-relaxed">Prompt on-site installation teams dispatched to offices and homes across Pakistan.</p>
+                    </div>
+
+                    <div class="card-navy p-6">
+                        <div class="text-brand-cyan text-3xl mb-4"><i class="fa-solid fa-headset"></i></div>
+                        <h3 class="text-base font-bold text-white mb-2">Dedicated Post Support</h3>
+                        <p class="text-slate-400 text-xs leading-relaxed">Dependable troubleshooting, network maintenance, and ongoing remote technical support.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 2: SERVICES -->
+        <section id="page-services" class="page-view">
+            <div class="bg-navy-900 border-b border-navy-800 py-12">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <span class="text-brand-cyan text-xs font-bold tracking-widest uppercase">Reliable & Secure Solutions</span>
+                    <h1 class="text-3xl font-extrabold text-white mt-1">Our Services</h1>
+                    <p class="text-slate-400 text-xs sm:text-sm mt-2 max-w-xl mx-auto">Comprehensive IT and connectivity solutions tailored for modern businesses and residences across Pakistan.</p>
+                </div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Network Solutions -->
+                    <div class="card-navy p-8 flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 rounded-lg bg-navy-800 text-brand-cyan flex items-center justify-center text-2xl mb-5">
+                                <i class="fa-solid fa-network-wired"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">Network Solutions</h3>
+                            <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                                Complete structured network setups including Cat6/Cat6A cabling, rack termination, managed L2/L3 switches, routing protocols, firewalls, and VPN setup.
+                            </p>
+                        </div>
+                        <button onclick="openQuoteModal('Network Solutions')" class="w-full sm:w-auto self-start bg-navy-800 hover:bg-brand-cyan text-white text-xs font-semibold px-5 py-2.5 rounded-md border border-navy-700 transition">
+                            Request Quote
+                        </button>
+                    </div>
+
+                    <!-- CCTV Installation -->
+                    <div class="card-navy p-8 flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 rounded-lg bg-navy-800 text-brand-cyan flex items-center justify-center text-2xl mb-5">
+                                <i class="fa-solid fa-video"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">CCTV Installation</h3>
+                            <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                                IP CCTV and HD analog surveillance systems, NVR configuration, motion alerts, night vision cameras, and secure mobile remote viewing setup.
+                            </p>
+                        </div>
+                        <button onclick="openQuoteModal('CCTV Installation')" class="w-full sm:w-auto self-start bg-navy-800 hover:bg-brand-cyan text-white text-xs font-semibold px-5 py-2.5 rounded-md border border-navy-700 transition">
+                            Request Quote
+                        </button>
+                    </div>
+
+                    <!-- Wi-Fi & LAN Setup -->
+                    <div class="card-navy p-8 flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 rounded-lg bg-navy-800 text-brand-cyan flex items-center justify-center text-2xl mb-5">
+                                <i class="fa-solid fa-wifi"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">Wi-Fi & LAN Setup</h3>
+                            <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                                Enterprise wireless Access Points (APs), mesh Wi-Fi for multi-story buildings, seamless roaming, guest network bandwidth management, and LAN drops.
+                            </p>
+                        </div>
+                        <button onclick="openQuoteModal('Wi-Fi & LAN Setup')" class="w-full sm:w-auto self-start bg-navy-800 hover:bg-brand-cyan text-white text-xs font-semibold px-5 py-2.5 rounded-md border border-navy-700 transition">
+                            Request Quote
+                        </button>
+                    </div>
+
+                    <!-- IT Support -->
+                    <div class="card-navy p-8 flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 rounded-lg bg-navy-800 text-brand-cyan flex items-center justify-center text-2xl mb-5">
+                                <i class="fa-solid fa-screwdriver-wrench"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">IT Support & Hardware</h3>
+                            <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                                Computer hardware setup, OS deployment, network troubleshooting, virus cleanup, data backup solutions, and routine office IT maintenance.
+                            </p>
+                        </div>
+                        <button onclick="openQuoteModal('IT Support')" class="w-full sm:w-auto self-start bg-navy-800 hover:bg-brand-cyan text-white text-xs font-semibold px-5 py-2.5 rounded-md border border-navy-700 transition">
+                            Request Quote
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 3: COVERAGE -->
+        <section id="page-coverage" class="page-view">
+            <div class="bg-navy-900 border-b border-navy-800 py-12">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <span class="text-brand-cyan text-xs font-bold tracking-widest uppercase">Nationwide Reach</span>
+                    <h1 class="text-3xl font-extrabold text-white mt-1">Pakistan-Wide IT Operations</h1>
+                    <p class="text-slate-400 text-xs sm:text-sm mt-2 max-w-lg mx-auto">We deploy network and CCTV projects across all major commercial hubs and provinces.</p>
+                </div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                    <div class="card-navy p-6 border-t-2 border-brand-cyan">
+                        <div class="text-white font-bold text-base mb-2"><i class="fa-solid fa-map-pin text-brand-cyan mr-2"></i>Islamabad & Rawalpindi</div>
+                        <p class="text-xs text-slate-400 leading-relaxed">Primary operational hub with rapid same-day response for IT support and surveys.</p>
+                    </div>
+
+                    <div class="card-navy p-6 border-t-2 border-brand-cyan">
+                        <div class="text-white font-bold text-base mb-2"><i class="fa-solid fa-map-pin text-brand-cyan mr-2"></i>Punjab Region</div>
+                        <p class="text-xs text-slate-400 leading-relaxed">Lahore, Faisalabad, Multan, Sialkot, Gujranwala, Bahawalpur, Sargodha, Rahim Yar Khan.</p>
+                    </div>
+
+                    <div class="card-navy p-6 border-t-2 border-brand-cyan">
+                        <div class="text-white font-bold text-base mb-2"><i class="fa-solid fa-map-pin text-brand-cyan mr-2"></i>Sindh & KPK</div>
+                        <p class="text-xs text-slate-400 leading-relaxed">Karachi, Hyderabad, Sukkur, Peshawar, Mardan, Abbottabad, Swat.</p>
+                    </div>
+
+                    <div class="card-navy p-6 border-t-2 border-brand-cyan">
+                        <div class="text-white font-bold text-base mb-2"><i class="fa-solid fa-map-pin text-brand-cyan mr-2"></i>Balochistan & AJK/GB</div>
+                        <p class="text-xs text-slate-400 leading-relaxed">Quetta, Gwadar, Muzaffarabad, Gilgit, and surrounding industrial/commercial sites.</p>
+                    </div>
+                </div>
+
+                <!-- Call to Action Box -->
+                <div class="card-navy p-8 text-center max-w-2xl mx-auto">
+                    <h3 class="text-lg font-bold text-white mb-2">Planning a Project in Your City?</h3>
+                    <p class="text-slate-300 text-xs sm:text-sm mb-6">Contact our engineering team with your site details and specifications for a fast evaluation.</p>
+                    <a href="https://wa.me/923135893970?text=Hello%20Corelink,%20I%20have%20an%20IT%20project%20in%20my%20city." 
+                       target="_blank" 
+                       class="inline-flex items-center space-x-2 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs sm:text-sm px-6 py-3 rounded-md transition shadow-md">
+                        <i class="fa-brands fa-whatsapp text-base"></i>
+                        <span>Inquire About Your City</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 4: ABOUT & CONTACT -->
+        <section id="page-about" class="page-view">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
+                
+                <!-- About Corelink -->
+                <div class="text-center max-w-3xl mx-auto">
+                    <h1 class="text-2xl sm:text-3xl font-extrabold text-white mb-3">About Corelink Technologies</h1>
+                    <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+                        Corelink Technologies is an Islamabad/Rawalpindi based IT services company focused on networking, CCTV and connectivity solutions. Our goal is to deliver dependable technology with professional installation and support across Pakistan.
+                    </p>
+                </div>
+
+                <!-- Leadership / Team Cards (Updated: Titles removed, Phone + WhatsApp links added) -->
+                <div>
+                    <h2 class="text-xl font-bold text-white text-center mb-6">Our Team</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
+                        <!-- Muhammad Zeeshan Nisar Card -->
+                        <div class="card-navy p-6 text-center flex flex-col justify-between items-center space-y-4">
+                            <div>
+                                <div class="w-14 h-14 rounded-full bg-navy-800 border border-brand-cyan/40 text-brand-cyan flex items-center justify-center text-xl font-bold mx-auto mb-3">
+                                    MZ
+                                </div>
+                                <h3 class="font-bold text-white text-lg">Muhammad Zeeshan Nisar</h3>
+                            </div>
+                            
+                            <div class="w-full space-y-2.5 pt-2">
+                                <a href="tel:03135893970" class="flex items-center justify-center space-x-2 bg-navy-800 hover:bg-navy-700 text-slate-200 text-xs py-2 px-4 rounded-md border border-navy-700 transition font-mono">
+                                    <i class="fa-solid fa-phone text-brand-cyan"></i>
+                                    <span>03135893970</span>
+                                </a>
+                                <a href="https://wa.me/923135893970?text=Hello%20Muhammad%20Zeeshan%20Nisar,%20I%20want%20to%20discuss%20an%20IT%20project." 
+                                   target="_blank" 
+                                   class="flex items-center justify-center space-x-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold py-2 px-4 rounded-md transition shadow">
+                                    <i class="fa-brands fa-whatsapp text-sm"></i>
+                                    <span>Chat on WhatsApp</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Muhammad Ahmed Card -->
+                        <div class="card-navy p-6 text-center flex flex-col justify-between items-center space-y-4">
+                            <div>
+                                <div class="w-14 h-14 rounded-full bg-navy-800 border border-brand-cyan/40 text-brand-cyan flex items-center justify-center text-xl font-bold mx-auto mb-3">
+                                    MA
+                                </div>
+                                <h3 class="font-bold text-white text-lg">Muhammad Ahmed</h3>
+                            </div>
+                            
+                            <div class="w-full space-y-2.5 pt-2">
+                                <a href="tel:03112716143" class="flex items-center justify-center space-x-2 bg-navy-800 hover:bg-navy-700 text-slate-200 text-xs py-2 px-4 rounded-md border border-navy-700 transition font-mono">
+                                    <i class="fa-solid fa-phone text-brand-cyan"></i>
+                                    <span>03112716143</span>
+                                </a>
+                                <a href="https://wa.me/923112716143?text=Hello%20Muhammad%20Ahmed,%20I%20want%20to%20discuss%20an%20IT%20project." 
+                                   target="_blank" 
+                                   class="flex items-center justify-center space-x-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold py-2 px-4 rounded-md transition shadow">
+                                    <i class="fa-brands fa-whatsapp text-sm"></i>
+                                    <span>Chat on WhatsApp</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Get In Touch Card -->
+                <div class="bg-navy-900 border border-navy-800 rounded-xl p-8 max-w-2xl mx-auto text-center">
+                    <h2 class="text-xl font-bold text-white mb-2">Get in Touch</h2>
+                    <p class="text-xs text-slate-400 mb-6">Need a network, CCTV or IT solution? Contact us directly.</p>
+
+                    <div class="space-y-3 text-xs text-slate-300 mb-8">
+                        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                            <a href="https://wa.me/923135893970" target="_blank" class="hover:text-brand-cyan transition flex items-center space-x-2">
+                                <i class="fa-brands fa-whatsapp text-emerald-400 text-sm"></i>
+                                <span>Muhammad Zeeshan: 03135893970</span>
+                            </a>
+                            <span class="hidden sm:inline text-slate-600">|</span>
+                            <a href="https://wa.me/923112716143" target="_blank" class="hover:text-brand-cyan transition flex items-center space-x-2">
+                                <i class="fa-brands fa-whatsapp text-emerald-400 text-sm"></i>
+                                <span>Muhammad Ahmed: 03112716143</span>
+                            </a>
+                        </div>
+                        <p class="flex items-center justify-center space-x-2">
+                            <i class="fa-solid fa-envelope text-brand-cyan"></i>
+                            <a href="mailto:corelinktech.pk@gmail.com" class="underline text-brand-cyan">corelinktech.pk@gmail.com</a>
+                        </p>
+                        <p class="flex items-center justify-center space-x-2">
+                            <i class="fa-solid fa-location-dot text-rose-500"></i>
+                            <span>Islamabad / Rawalpindi & Nationwide Pakistan</span>
+                        </p>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row justify-center gap-3">
+                        <a href="https://wa.me/923135893970" 
+                           target="_blank" 
+                           class="inline-flex items-center justify-center space-x-2 bg-brand-cyan hover:bg-sky-600 text-white font-semibold text-xs px-5 py-3 rounded-md transition shadow-md">
+                            <i class="fa-brands fa-whatsapp text-sm"></i>
+                            <span>WhatsApp Zeeshan Nisar</span>
+                        </a>
+                        <a href="https://wa.me/923112716143" 
+                           target="_blank" 
+                           class="inline-flex items-center justify-center space-x-2 bg-brand-cyan hover:bg-sky-600 text-white font-semibold text-xs px-5 py-3 rounded-md transition shadow-md">
+                            <i class="fa-brands fa-whatsapp text-sm"></i>
+                            <span>WhatsApp Muhammad Ahmed</span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- Request Quote Modal -->
+    <div id="quote-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+        <div class="card-navy max-w-md w-full p-6 relative">
+            <button onclick="closeQuoteModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+            <h3 class="text-lg font-bold text-white mb-1">Request Quote</h3>
+            <p class="text-xs text-brand-cyan mb-4" id="modal-service-title">Service Selection</p>
+            
+            <div class="space-y-3">
+                <input type="text" id="quote-name" placeholder="Your Name *" class="w-full bg-navy-950 border border-navy-800 rounded-md px-3 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-brand-cyan">
+                <input type="tel" id="quote-phone" placeholder="WhatsApp / Phone Number *" class="w-full bg-navy-950 border border-navy-800 rounded-md px-3 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-brand-cyan">
+                <input type="text" id="quote-city" placeholder="Your City (e.g. Lahore, Karachi, Islamabad)" class="w-full bg-navy-950 border border-navy-800 rounded-md px-3 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-brand-cyan">
+                <textarea id="quote-details" rows="3" placeholder="Brief details about your requirement..." class="w-full bg-navy-950 border border-navy-800 rounded-md px-3 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-brand-cyan"></textarea>
+                
+                <button onclick="sendQuoteToWhatsApp()" class="w-full bg-brand-cyan hover:bg-sky-600 text-white font-semibold text-xs py-3 rounded-md transition flex items-center justify-center space-x-2">
+                    <i class="fa-brands fa-whatsapp text-base"></i>
+                    <span>Send Inquiry to WhatsApp</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-navy-950 border-t border-navy-900 py-6 text-center text-[11px] text-slate-500">
+        <div class="max-w-7xl mx-auto px-4">
+            <p>&copy; <span id="year">2026</span> Corelink Technologies. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        let activeServiceModal = '';
+
+        function navigateTo(pageId) {
+            document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active'));
+            const targetPage = document.getElementById(`page-${pageId}`);
+            if (targetPage) targetPage.classList.add('active');
+
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('text-white', 'font-semibold');
+                link.classList.add('text-slate-300');
+            });
+            const activeBtn = document.getElementById(`nav-${pageId}`);
+            if (activeBtn) {
+                activeBtn.classList.add('text-white', 'font-semibold');
+                activeBtn.classList.remove('text-slate-300');
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+
+        function openQuoteModal(serviceName) {
+            activeServiceModal = serviceName;
+            document.getElementById('modal-service-title').textContent = serviceName;
+            document.getElementById('quote-modal').classList.remove('hidden');
+        }
+
+        function closeQuoteModal() {
+            document.getElementById('quote-modal').classList.add('hidden');
+        }
+
+        function sendQuoteToWhatsApp() {
+            const name = document.getElementById('quote-name').value || 'Customer';
+            const phone = document.getElementById('quote-phone').value || 'N/A';
+            const city = document.getElementById('quote-city').value || 'Pakistan';
+            const details = document.getElementById('quote-details').value || 'Service Inquiry';
+            
+            const message = `Hello Corelink Technologies!%0A*Service Quote Inquiry*%0A*Service:* ${activeServiceModal}%0A*Name:* ${name}%0A*Phone:* ${phone}%0A*City:* ${city}%0A*Details:* ${details}`;
+            
+            window.open(`https://wa.me/923135893970?text=${message}`, '_blank');
+            closeQuoteModal();
+        }
+    </script>
+</body>
+</html>
